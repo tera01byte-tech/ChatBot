@@ -11,7 +11,7 @@ from openai import OpenAI, AuthenticationError, RateLimitError, APIConnectionErr
 load_dotenv()
 
 # Top-level ASGI entrypoint required by Vercel
-app = FastAPI(title="Personal GPT Bot")
+app = FastAPI(title="ChatBot")
 
 
 class Message(BaseModel):
@@ -31,7 +31,7 @@ HTML_CONTENT = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal GPT Bot</title>
+  <title>ChatBot</title>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     :root {
@@ -112,7 +112,7 @@ HTML_CONTENT = """<!DOCTYPE html>
       align-items: center;
       background: var(--sidebar);
     }
-    #chat-header h1 { font-size: 1.1rem; }
+    #chat-header h1 { font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
     #messages {
       flex: 1;
       overflow-y: auto;
@@ -175,7 +175,7 @@ HTML_CONTENT = """<!DOCTYPE html>
 </head>
 <body>
   <div id="sidebar">
-    <h2>🤖 Personal GPT</h2>
+    <h2>🤖 ChatBot</h2>
     
     <div class="setting-group">
       <label for="api-key">OpenAI API Key (Optional)</label>
@@ -202,13 +202,15 @@ HTML_CONTENT = """<!DOCTYPE html>
 
   <div id="chat-container">
     <div id="chat-header">
-      <h1>💬 Chat</h1>
-      <span style="font-size: 0.85rem; color: var(--text-muted);" id="status">Online</span>
+      <h1>🤖 ChatBot</h1>
+      <span style="font-size: 0.85rem; color: #22c55e; display: flex; align-items: center; gap: 6px;" id="status">
+        <span style="display:inline-block; width:8px; height:8px; background:#22c55e; border-radius:50%;"></span> Online
+      </span>
     </div>
 
     <div id="messages">
       <div class="message bot">
-        Hello! I am your personal GPT assistant. How can I help you today?
+        Hello! I am <strong>ChatBot</strong>, your personal AI assistant. How can I help you today?
       </div>
     </div>
 
