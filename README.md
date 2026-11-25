@@ -59,7 +59,6 @@ python bot.py
 chatboat/
 ├── bot.py             # Terminal/CLI chatbot with streaming & memory
 ├── app.py             # FastAPI browser-based chatbot UI (Vercel-ready)
-├── vercel.json        # Vercel deployment and routing configuration
 ├── requirements.txt   # Dependencies (fastapi, uvicorn, openai, pydantic, python-dotenv)
 ├── .env               # Your private API key and configurations (ignored by git)
 ├── .env.example       # Example configuration template
