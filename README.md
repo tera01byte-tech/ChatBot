@@ -2,7 +2,7 @@
 
 A Python-based personal GPT chatbot powered by the OpenAI API. It includes:
 1. **CLI Terminal Bot (`bot.py`)**: Real-time streaming responses, conversation history memory, model switching, and slash commands.
-2. **Web Browser UI (`app.py`)**: A modern ChatGPT-like web interface powered by Streamlit with custom temperature, model switching, and chat management.
+2. **Web Browser UI (`app.py`)**: A modern ChatGPT-like web interface powered by FastAPI & Vercel serverless with custom temperature, model switching, and chat management.
 
 ---
 
@@ -16,40 +16,40 @@ OPENAI_API_KEY=sk-your-actual-api-key-here
 OPENAI_MODEL=gpt-4o-mini
 ```
 
-*(If you don't enter it into `.env`, the bot will ask you for it when you run it).*
-
 ---
 
-### 2. Activate Virtual Environment
-The virtual environment is already prepared in `venv/`. Activate it with:
+### 2. Run Locally
 
+#### Option A: Web App (FastAPI - Vercel Ready)
+Run the web application locally:
 ```bash
-source venv/bin/activate
+python app.py
 ```
+Or with uvicorn:
+```bash
+uvicorn app:app --reload
+```
+Open `http://localhost:8000` in your browser.
 
----
-
-### 3. Run the Chatbot
-
-#### Option A: Terminal Chatbot (CLI)
-Run the interactive terminal bot:
+#### Option B: Terminal Chatbot (CLI)
 ```bash
 python bot.py
 ```
 
-**Commands inside the CLI bot:**
-- `/clear` - Reset conversation memory
-- `/model <name>` - Switch model (e.g., `/model gpt-4o`, `/model gpt-4o-mini`)
-- `/system <text>` - Change the bot's persona/system prompt
-- `/history` - View number of messages in the current session
-- `/exit` or `exit` - Quit
+---
 
-#### Option B: Web Chatbot (Streamlit UI)
-Run the web application:
-```bash
-streamlit run app.py
-```
-This will automatically open your web browser with a full chat interface at `http://localhost:8501`.
+## ☁️ Deploy to Vercel
+
+1. Commit and push your code to your GitHub repository:
+   ```bash
+   git add .
+   git commit -m "Configure FastAPI entrypoint for Vercel deployment"
+   git push
+   ```
+2. In your **Vercel Dashboard**:
+   - Go to your Project Settings -> **Environment Variables**.
+   - Add `OPENAI_API_KEY` with your OpenAI API key value.
+3. Redeploy the project on Vercel. Vercel will automatically discover the `app` export in `app.py`.
 
 ---
 
@@ -58,8 +58,9 @@ This will automatically open your web browser with a full chat interface at `htt
 ```
 chatboat/
 ├── bot.py             # Terminal/CLI chatbot with streaming & memory
-├── app.py             # Streamlit browser-based chatbot UI
-├── requirements.txt   # Dependencies (openai, streamlit, python-dotenv)
+├── app.py             # FastAPI browser-based chatbot UI (Vercel-ready)
+├── vercel.json        # Vercel deployment and routing configuration
+├── requirements.txt   # Dependencies (fastapi, uvicorn, openai, pydantic, python-dotenv)
 ├── .env               # Your private API key and configurations (ignored by git)
 ├── .env.example       # Example configuration template
 ├── .gitignore         # Prevents committing .env or venv
